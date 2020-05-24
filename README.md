@@ -1,9 +1,24 @@
-# Soubor dokumentů
-Studentský parlament KGM zřídil svůj Soubor dokumentů -- kolekci důležitých dokumentů Parlamentu. Jedná se o obdobu Sbírky zákonů ČR. Soubor existuje kromě papírové verze i ve verzi elektronické, která je přístupná veřejnosti. Parlament zpřístupňuje zdrojový kód této aplikace veřejně, aby mohla být využita i na dalších školách.
+# soubor-dokumentu
 
-## Cíle vývoje
-- Responsivní PWA
-- Nenáročný hosting
-  - Žádné databáze, VPS, aplikační servery
-  - Lze zprovoznit na libovolném webhostingu (třeba GH Pages :-))
-  
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
