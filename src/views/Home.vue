@@ -75,7 +75,6 @@
 <script lang="ts">
 import Vue from "vue";
 import {ASBDocument} from "@/model/ASBDocument";
-import * as rm from "typed-rest-client";
 // @ts-ignore
 import stripAccented from "strip-accented";
 export default Vue.extend({
@@ -104,17 +103,16 @@ export default Vue.extend({
   },
   async mounted () {
     this.loading = true;
-    const loc:any = `${location.protocol}//${location.host}/`;
-    const rest: rm.RestClient = new rm.RestClient("soubor-dokumentu", loc);
-    console.log("fetching from " + loc);
-    try {
-      const res: rm.IRestResponse<ASBDocument[]> = await rest.get("/list.json");
-      if (res.statusCode === 200) this.documents = res.result;
-      else throw new Error("REST client responded with code " + res.statusCode);
-    } catch (e) {
-      console.error(e);
-      this.errorLoading = true;
-    } finally {
+    const loc:any = `${location.protocol}//${location.host}/list.json`;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", loc);
+    xhr.send();
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        this.documents = JSON.parse(xhr.response);
+      } else {
+        this.errorLoading = false;
+      }
       this.loading = false;
     }
   },
