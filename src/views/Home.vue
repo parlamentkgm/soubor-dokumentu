@@ -60,7 +60,7 @@
                 <span v-if="item.type == 'other'">SP-{{item.year}}-{{item.number}}</span>
               </template>
               <template v-slot:item.options="{item}">
-                <v-btn icon @click="showPdf(item)">
+                <v-btn icon @click="showPdf(item.file)">
                   <v-icon>mdi-file-document</v-icon>
                 </v-btn>
               </template>
@@ -131,8 +131,15 @@ export default Vue.extend({
         }
       }
     },
-    showPdf(doc:ASBDocument) {
-      window.location.href = doc.file;
+    showPdf(path:string) {
+      var req = new XMLHttpRequest();
+      req.open("GET", path, true);
+      req.responseType = "arraybuffer";
+      req.send();
+      req.onload = () => {
+        const file = new Blob([req.response], {type: "application/pdf"});
+        window.open(URL.createObjectURL(file), "_blank");
+      }
     }
   }
 });
