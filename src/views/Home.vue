@@ -132,14 +132,7 @@ export default Vue.extend({
       }
     },
     showPdf(path:string) {
-      var req = new XMLHttpRequest();
-      req.open("GET", path, true);
-      req.responseType = "arraybuffer";
-      req.send();
-      req.onload = () => {
-        const file = new Blob([req.response], {type: "application/pdf"});
-        window.open(URL.createObjectURL(file), "_blank");
-      }
+      this.$router.push("/pdfViewer/" + encodeURIComponent(path));
     }
   }
 });
