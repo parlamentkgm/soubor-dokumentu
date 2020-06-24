@@ -1,6 +1,9 @@
 <template>
     <v-app>
         <v-app-bar dense app>
+            <v-btn icon @click="back()" :disabled="backDisabled">
+                <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
             <v-toolbar-title>Soubor dokumentů</v-toolbar-title>
         </v-app-bar>
         <v-content>
@@ -20,3 +23,19 @@
         </v-footer>
     </v-app>
 </template>
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+    name: "app",
+    methods: {
+        back () {
+            this.$router.go(-1);
+        }
+    },
+    computed: {
+        backDisabled () {
+            return (this.$route.name === "Home") ? true : false;
+        }
+    }
+})
+</script>
